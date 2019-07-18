@@ -1,0 +1,37 @@
+﻿body 
+{
+    background-color: rgb(50, 30, 30);
+    font: normal 10/16 Lucida console;
+}
+
+.console
+{
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    background-color: black;
+    color: rgb(192, 192, 192);
+    border: 4px solid rgb(150, 150, 150);
+    width: 80%;
+    height: 60%;
+    margin: auto;
+    overflow: auto;
+}
+
+.console-head 
+{
+    background-color: rgb(150, 150, 150);
+    color: rgb(30, 30, 30);
+}
+
+#input-field {
+    position: relative;
+    color: rgb(192, 192, 192);
+    background-color: black;
+    width: 99%;
+    
+    /*outline: none;*/
+    border: none;
+    height: auto;
+    word-wrap: break-word;
+}
