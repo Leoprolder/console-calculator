@@ -33,5 +33,6 @@
     /*outline: none;*/
     border: none;
     height: auto;
-    word-wrap: break-word;
+    word-break: break-all;
+    resize: vertical;
 }
