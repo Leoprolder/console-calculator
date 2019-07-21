@@ -1,7 +1,8 @@
 ﻿body 
 {
-    background-color: rgb(50, 30, 30);
-    font: normal 10/16 Lucida console;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Lucida Console';
+    font-size: 20px;
 }
 
 .console
@@ -16,6 +17,7 @@
     height: 60%;
     margin: auto;
     overflow: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .console-head 
@@ -24,15 +26,35 @@
     color: rgb(30, 30, 30);
 }
 
-#input-field {
+#input-field 
+{
     position: relative;
     color: rgb(192, 192, 192);
     background-color: black;
     width: 99%;
-    
     /*outline: none;*/
     border: none;
     height: auto;
     word-break: break-all;
     resize: vertical;
 }
+
+#closer
+{
+    float: right;
+    margin: 0px 7px 5px;
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+    border-radius: 5px;
+    width: 20px;
+    height: 17px;
+    text-align: center;
+    top: 5%;
+}
+
+    #closer:hover 
+    {
+        background-color: rgb(230, 0, 0);
+        border-color: rgb(230, 0, 0);
+    }
