@@ -11,8 +11,12 @@
         <span>Hello, this is a console calculator!</span> <br />
         <span>It recognizes arithmetical expressions and evaluates them. </span><br />
         <span>Please, type one using brackets or these signs: +, -, *, /</span><br />
+        @foreach (var e in ViewBag.ExpressionLog)
+        {
+            <span>@e.Key</span><br />
+            <span>@e.Value</span><br />
+        }
     </div>
-
-    @*<input id="input-field" type="text"/>*@
-    <textarea id="input-field"></textarea>
+    
+    <textarea id="input-field" name="InputExpression" typeof="text" value="@ViewBag.TextExpression"></textarea>
 </div>

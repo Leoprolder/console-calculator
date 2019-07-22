@@ -1,10 +1,12 @@
 ﻿using System;
 
-namespace Evaluation
+namespace console_calculator.Models.Evaluation
 {
     interface IOperation
     {
-        double Evaluate(double first, double second);
+        int Priority { get; set; }
+
+        double Apply(double left, double right);
 
         bool IsLegal(); //Нужен класс-определитель операции
     }

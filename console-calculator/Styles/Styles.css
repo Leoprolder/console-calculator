@@ -1,8 +1,8 @@
-﻿body 
-{
+﻿body {
     background-color: rgb(255, 255, 255);
     font-family: 'Lucida Console';
     font-size: 20px;
+    /*background: linear-gradient(90deg, #d3c52a, #000000);*/
 }
 
 .console
@@ -17,7 +17,7 @@
     height: 60%;
     margin: auto;
     overflow: auto;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 }
 
 .console-head 
@@ -37,6 +37,8 @@
     height: auto;
     word-break: break-all;
     resize: vertical;
+    font-family: 'Lucida Console';
+    font-size: 20px;
 }
 
 #closer
@@ -53,8 +55,8 @@
     top: 5%;
 }
 
-    #closer:hover 
-    {
-        background-color: rgb(230, 0, 0);
-        border-color: rgb(230, 0, 0);
-    }
+#closer:hover 
+{
+    background-color: rgb(230, 0, 0);
+    border-color: rgb(230, 0, 0);
+}

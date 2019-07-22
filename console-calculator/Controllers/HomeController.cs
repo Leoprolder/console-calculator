@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using console_calculator.Models.Evaluation;
 
 namespace console_calculator.Controllers
 {
     public class HomeController : Controller
     {
+        ControllerContext controllerContext = new ControllerContext();
+
         public ActionResult Index()
         {
+            Expression.Log = new Dictionary<string, string>();
+            //Expression.Log.Add("Hello", "World");
+            ViewBag.ExpressionLog = Expression.Log;
             return View();
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult GetValue(string TextExpression)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            Expression.TextExpression = TextExpression;
+            return View("Index");
         }
     }
 }
