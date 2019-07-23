@@ -14,8 +14,6 @@ namespace console_calculator.Controllers
         public ActionResult Index()
         {
             Expression expression = new Expression();
-            expression.Log = new Dictionary<string, string>();
-            //Expression.Log.Add("Hello", "World");
             ViewBag.ExpressionLog = expression.Log;
             return View();
         }
@@ -23,10 +21,17 @@ namespace console_calculator.Controllers
         [HttpPost]
         public ActionResult Index(string inputField)
         {
-            var a = inputField;
-            Expression expression = new Expression();
-            expression.Log = new Dictionary<string, string>();
-            expression.Log.Add(inputField, "Incorrect expression");
+            Expression expression = new Expression(inputField);
+            string answer;
+            try
+            {
+                answer = expression.Evaluate().ToString();
+            }
+            catch
+            {
+                answer = "Wrong input";
+            }
+            expression.Log.Add(inputField, answer);
             ViewBag.ExpressionLog = expression.Log;
             return View();
         }
