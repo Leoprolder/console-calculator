@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="console" >
+<div class="console">
     <div class="console-head">
         <span style="">Console calculator.exe</span>
         <span id="closer">X</span>
@@ -17,6 +17,10 @@
             <span>@e.Value</span><br />
         }
     </div>
-    
-    <textarea id="input-field" name="InputExpression" typeof="text" value="@ViewBag.TextExpression"></textarea>
+
+    @using (Html.BeginForm())
+    {
+        @Html.TextArea("inputField")
+        <input id="hdnSubmit" type="submit" style="display: none;"/>
+    }
 </div>

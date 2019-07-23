@@ -7,8 +7,8 @@ namespace console_calculator.Models.Evaluation
 {
     public class Expression
     {
-        public static string TextExpression { get; set; }
-        public static Dictionary<String, String> Log { get; set; }
+        public string TextExpression { get; set; }
+        public Dictionary<String, String> Log { get; set; }
 
         public Expression(string input)
         {
@@ -17,6 +17,7 @@ namespace console_calculator.Models.Evaluation
 
         public Expression()
         {
+            Log = new Dictionary<string, string>();
             TextExpression = "";
         }
     }

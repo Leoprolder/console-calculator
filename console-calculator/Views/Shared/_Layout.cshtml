@@ -1,22 +1,22 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Console calculator</title>
-    @Styles.Render("~/Styles/Styles.css")
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script>
-        $(document).on('keydown', '#input-field', function (event) {
-            if (event.keyCode == 13)
-                $.get("/Home/GetValue/@ViewBag.InputExpression")
-            //location.href='/Home/GetValue';
-        });
-    </script>
-</head>
-<body>
-    <a href='/Home/GetValue/"penis"' name="TextExpression">aa</a>
-    @RenderBody()
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Console calculator</title>
+        @Styles.Render("~/Styles/Styles.css")
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script>
+            $(document).on('keydown', '#inputField', function (event) {
+                if (event.keyCode == 13) {
+                    $('#hdnSubmit').click();
+                    $('#inputField').val("");
+                }
+            });
+        </script>
+    </head>
+    <body>
+        @RenderBody()
+    </body>
 </html>

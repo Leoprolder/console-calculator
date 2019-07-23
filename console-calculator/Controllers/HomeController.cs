@@ -13,17 +13,22 @@ namespace console_calculator.Controllers
 
         public ActionResult Index()
         {
-            Expression.Log = new Dictionary<string, string>();
+            Expression expression = new Expression();
+            expression.Log = new Dictionary<string, string>();
             //Expression.Log.Add("Hello", "World");
-            ViewBag.ExpressionLog = Expression.Log;
+            ViewBag.ExpressionLog = expression.Log;
             return View();
         }
 
-        [HttpGet]
-        public ActionResult GetValue(string TextExpression)
+        [HttpPost]
+        public ActionResult Index(string inputField)
         {
-            Expression.TextExpression = TextExpression;
-            return View("Index");
+            var a = inputField;
+            Expression expression = new Expression();
+            expression.Log = new Dictionary<string, string>();
+            expression.Log.Add(inputField, "Incorrect expression");
+            ViewBag.ExpressionLog = expression.Log;
+            return View();
         }
     }
 }
