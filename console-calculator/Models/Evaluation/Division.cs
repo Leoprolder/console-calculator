@@ -8,6 +8,13 @@ namespace console_calculator.Models.Evaluation
     public class Division : IOperation
     {
         public int Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public char Definition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public Division()
+        {
+            Priority = 3;
+            Definition = '/';
+        }
 
         public double Apply(double left, double right)
         {

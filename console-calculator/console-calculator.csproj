@@ -127,6 +127,8 @@
     <Compile Include="Models\Evaluation\Expression.cs" />
     <Compile Include="Models\Evaluation\IOperation.cs" />
     <Compile Include="Models\Evaluation\Multiplication.cs" />
+    <Compile Include="Models\Evaluation\Operation.cs" />
+    <Compile Include="Models\RPNParser.cs" />
     <Compile Include="Models\Evaluation\Subtraction.cs" />
     <Compile Include="Models\Evaluation\Sum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -33,6 +33,7 @@ namespace console_calculator.Controllers
             }
             expression.Log.Add(inputField, answer);
             ViewBag.ExpressionLog = expression.Log;
+            inputField = "";
             return View();
         }
     }

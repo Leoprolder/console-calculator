@@ -5,20 +5,32 @@ using System.Web;
 
 namespace console_calculator.Models.Evaluation
 {
-    public class Sum : IOperation
+    public class Bracket : IOperation
     {
         public int Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public char Definition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public Sum()
+        public Bracket(char definition)
         {
-            Priority = 2;
-            Definition = '+';
+            switch(definition)
+            {
+                case '(':
+                    Priority = 0;
+                    Definition = '(';
+                    break;
+                case ')':
+                    Priority = 1;
+                    Definition = ')';
+                    break;
+                default:
+                    break;
+            }
         }
 
         public double Apply(double left, double right)
         {
-            return left + right;
+            Priority = Priority + 1;
+            return Priority;
         }
 
         public bool IsLegal()

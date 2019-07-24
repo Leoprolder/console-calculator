@@ -2,12 +2,12 @@
 
 namespace console_calculator.Models.Evaluation
 {
-    interface IOperation
+    public interface IOperation
     {
         int Priority { get; set; }
-
+        char Definition { get; set; }
         double Apply(double left, double right);
 
-        bool IsLegal(); //Нужен класс-определитель операции
+        bool IsLegal();
     }
 }

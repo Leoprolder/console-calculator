@@ -8,6 +8,13 @@ namespace console_calculator.Models.Evaluation
     public class Subtraction : IOperation
     {
         public int Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public char Definition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public Subtraction()
+        {
+            Priority = 2;
+            Definition = '-';
+        }
 
         public double Apply(double left, double right)
         {
