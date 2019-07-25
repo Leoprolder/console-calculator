@@ -34,8 +34,8 @@ namespace console_calculator.Models.Evaluation
             return operations.Contains(c);
         }
 
-        public int Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Definition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Priority { get; set; }
+        public string Definition { get; set; }
 
         public double Apply(double left, double right)
         {

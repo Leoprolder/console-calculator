@@ -7,8 +7,8 @@ namespace console_calculator.Models.Evaluation
 {
     public class Multiplication : IOperation
     {
-        public int Priority { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public char Definition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Priority { get; set; }
+        public char Definition { get; set; }
 
         public Multiplication()
         {

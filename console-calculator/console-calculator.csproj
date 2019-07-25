@@ -122,12 +122,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Evaluation\Brackets.cs" />
+    <Compile Include="Models\Evaluation\Bracket.cs" />
     <Compile Include="Models\Evaluation\Division.cs" />
     <Compile Include="Models\Evaluation\Expression.cs" />
     <Compile Include="Models\Evaluation\IOperation.cs" />
     <Compile Include="Models\Evaluation\Multiplication.cs" />
-    <Compile Include="Models\Evaluation\Operation.cs" />
+    <Compile Include="Models\Evaluation\OperationQualifier.cs" />
     <Compile Include="Models\RPNParser.cs" />
     <Compile Include="Models\Evaluation\Subtraction.cs" />
     <Compile Include="Models\Evaluation\Sum.cs" />

@@ -25,11 +25,11 @@ namespace console_calculator.Controllers
             string answer;
             try
             {
-                answer = expression.Evaluate().ToString();
+                answer = expression.Calculate().ToString();
             }
-            catch
+            catch (Exception ex)
             {
-                answer = "Wrong input";
+                answer = $"Wrong input, {ex.Message}";
             }
             expression.Log.Add(inputField, answer);
             ViewBag.ExpressionLog = expression.Log;
