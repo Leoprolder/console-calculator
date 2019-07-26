@@ -43,7 +43,7 @@ namespace console_calculator.Models.Evaluation
             string a = ToRPN(this);
 
             
-            double b = CalculateRPN("1 2 + 4 * 3 +");
+            double b = CalculateRPN(a);
             //Обратная польская запись поможеть
             //http://www.lib.unn.ru/students/src/struct.pdf
 
@@ -97,8 +97,9 @@ namespace console_calculator.Models.Evaluation
                                     if (OperationQualifier.IsOperation(res))
                                     {
                                         if (OperationQualifier.GetOperation(res).Priority >= operation.Priority) //Если приоритет входной операции больше, записываем в стек
-                                        {
-                                            output += res;
+                                        {                                                                        //Иначе - в выходную строку
+                                            output += res + " ";
+                                            stack = DeleteElementFromStack<string>(stack, j);
                                         }
                                     }
                                 }
@@ -127,17 +128,19 @@ namespace console_calculator.Models.Evaluation
                             break;
                     }
 
-                    if (j + i < input.TextExpression.Length) //Если не достигли конца выражения
-                        i += j - i - 1; //то переходим на символ за числом
-
                     if (isToStack)
                         stack.Push(number);
                     else
                         output += number + " "; //Разделяющий пробел
+
+                    if (j < input.TextExpression.Length) //Если не достигли конца выражения
+                        i += j - i - 1; //то переходим на символ за числом
+                    else
+                        break;
                 }
             }
 
-            output.Replace('.', ',');
+            output = output.Replace('.', ',');
 
             while (stack.Count > 0)
                 output += stack.Pop() + " ";
@@ -169,31 +172,23 @@ namespace console_calculator.Models.Evaluation
                         }
                     }
                 }
-            }
-
-            //Stack<string> stack = new Stack<string>(inputArray.Reverse());
-
-            //for (int i = inputArray.Length - 1; i >= 0; i--) //Перенесём з
-            //{
-            //    stack.Push(inputArray[i]);
-
-            //    //if (Char.TryParse(inputArray[i], out char res))
-            //    //{
-            //    //    if (OperationQualifier.IsOperation(res))
-            //    //    {
-            //    //        if (i >= 2) //Берём два числа в стек, применяем операцию
-            //    //        {
-            //    //            double left = Double.Parse(inputArray[]);
-            //    //            double right;
-            //    //            OperationQualifier.GetOperation(res).Apply(left, right);
-            //    //        }
-            //    //        else //Неверное выражение
-            //    //            throw new Exception();
-            //    //    }
-            //    //}
-            //}            
+            }      
 
             return stack.Pop();
+        }
+
+        private Stack<T> DeleteElementFromStack<T>(Stack<T> stack, int k)
+        {
+            T[] array = stack.ToArray();
+            Stack<T> newStack = new Stack<T>();
+            k = array.Length - k - 1;
+            for (int i = array.Length - 1; i >= 0; i--)
+            {
+                if (i != k)
+                    newStack.Push(array[i]);
+            }
+
+            return newStack;
         }
     }
 }
