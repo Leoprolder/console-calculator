@@ -8,17 +8,14 @@ namespace console_calculator.Models.Evaluation
     public class Expression
     {
         private string TextExpression { get; set; }
-        public static Dictionary<String, String> Log { get; set; }
 
         public Expression(string input)
         {
-            Log = new Dictionary<string, string>();
             TextExpression = input;
         }
 
         public Expression()
         {
-            Log = new Dictionary<string, string>();
             TextExpression = "";
         }
 
