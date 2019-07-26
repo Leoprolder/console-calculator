@@ -7,7 +7,5 @@ namespace console_calculator.Models.Evaluation
         int Priority { get; set; }
         char Definition { get; set; }
         double Apply(double left, double right);
-
-        bool IsLegal();
     }
 }

@@ -29,13 +29,7 @@ namespace console_calculator.Models.Evaluation
 
         public double Apply(double left, double right)
         {
-            Priority = Priority + 1;
-            return Priority;
-        }
-
-        public bool IsLegal()
-        {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }

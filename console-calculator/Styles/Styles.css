@@ -33,7 +33,7 @@
     color: rgb(192, 192, 192);
     background-color: black;
     width: 99%;
-    /*outline: none;*/
+    outline: none;
     border: none;
     height: auto;
     word-break: break-all;

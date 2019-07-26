@@ -14,7 +14,7 @@ namespace console_calculator.Controllers
         public ActionResult Index()
         {
             Expression expression = new Expression();
-            ViewBag.ExpressionLog = expression.Log;
+            ViewBag.ExpressionLog = Expression.Log;
             return View();
         }
 
@@ -31,9 +31,9 @@ namespace console_calculator.Controllers
             {
                 answer = $"Wrong input, {ex.Message}";
             }
-            expression.Log.Add(inputField, answer);
-            ViewBag.ExpressionLog = expression.Log;
-            inputField = "";
+            Expression.Log.Add(inputField, answer);
+            ViewBag.ExpressionLog = Expression.Log;
+            ViewBag.inputField = "";
             return View();
         }
     }

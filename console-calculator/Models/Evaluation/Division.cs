@@ -20,10 +20,5 @@ namespace console_calculator.Models.Evaluation
         {
             return left / right;
         }
-
-        public bool IsLegal()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
