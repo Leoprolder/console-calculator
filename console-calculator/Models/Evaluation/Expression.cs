@@ -40,7 +40,7 @@ namespace console_calculator.Models.Evaluation
             if (!IsLegal()) //Проверяем, выражение ли это
                 throw new Exception();
 
-            string a = ToRPN(this);
+            string a = ToRPN(this.TextExpression);
 
             
             double b = CalculateRPN(a);
@@ -50,15 +50,15 @@ namespace console_calculator.Models.Evaluation
             return b;
         }
 
-        private string ToRPN(Expression input) //Метод, конвертирующий выражение в обратную польскую запись
+        private string ToRPN(string input) //Метод, конвертирующий выражение в обратную польскую запись
         {
             Stack<string> stack = new Stack<string>();
             string output = String.Empty;
             bool isToStack = false;
 
-            for (int i = 0; i < input.TextExpression.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
-                char symbol = input.TextExpression[i];
+                char symbol = input[i];
 
                 if (OperationQualifier.IsOperation(symbol)) //Если встретившийся символ является операцией
                 {
@@ -71,14 +71,18 @@ namespace console_calculator.Models.Evaluation
                             stack.Push(operation.Definition.ToString());
                             isToStack = true;
                         }
-                        else //Если закрывающая скобка, то переписываем числа до открывающей скобки в строку
+                        else if (operation.Definition == ')') //Если закрывающая скобка, то переписываем числа до открывающей скобки в строку
                         {
+                            string nestedOutput = String.Empty;
+
                             while (stack.Peek() != "(")
                             {
-                                output += stack.Pop() + " ";
+                                nestedOutput += stack.Pop() + " ";
                             }
                             stack.Pop(); //удаляем открывающую скобку
                             isToStack = false;
+
+                            output += ToRPN(nestedOutput); //Рекурсивно вызываем метод для конвертации выражения в скобках
                         }
                     }
                     else
@@ -90,7 +94,8 @@ namespace console_calculator.Models.Evaluation
                         else
                         {
                             string[] stackArray = stack.ToArray();
-                            for (int j = stackArray.Length - 1; j >= 0; j--) //Находим последнюю операцию
+                            //for (int j = stackArray.Length - 1; j >= 0; j--) //Находим последнюю операцию
+                            for (int j = 0; j < stackArray.Length; j++) //Находим последнюю операцию
                             {
                                 if(Char.TryParse(stackArray[j], out char res))
                                 {
@@ -99,11 +104,12 @@ namespace console_calculator.Models.Evaluation
                                         if (OperationQualifier.GetOperation(res).Priority >= operation.Priority) //Если приоритет входной операции больше, записываем в стек
                                         {                                                                        //Иначе - в выходную строку
                                             output += res + " ";
-                                            stack = DeleteElementFromStack<string>(stack, j);
+                                            stackArray[j] = "_"; //Пометим элемент на удаление
                                         }
                                     }
                                 }
                             }
+                            stack = DeleteElementsFromStack(stackArray); //Удаляем помеченные элементы
                             stack.Push(operation.Definition.ToString());
                         }
                     }
@@ -111,16 +117,16 @@ namespace console_calculator.Models.Evaluation
                 else //Если символ или группа символов - число
                 {
                     string number = String.Empty;
-                    number += input.TextExpression[i];
+                    number += input[i];
                     int j = i + 1;
-                    while (j < input.TextExpression.Length) //Пробегаем цикл, пока не достингем конца
+                    while (j < input.Length) //Пробегаем цикл, пока не достингем конца
                     {
                         //Если символ и последующие за ним - цифры, то добавляем в output
-                        if (Int32.TryParse(input.TextExpression[j].ToString(), out int res) || input.TextExpression[j] == '.' || input.TextExpression[j] == ',')
+                        if (Int32.TryParse(input[j].ToString(), out int res) || input[j] == '.' || input[j] == ',')
                         {
-                            if ((number.IndexOf(',') > 0 || number.IndexOf('.') > 0) && (input.TextExpression[j] == '.' || input.TextExpression[j] == ',')) //Проверка на формат числа
+                            if ((number.IndexOf(',') > 0 || number.IndexOf('.') > 0) && (input[j] == '.' || input[j] == ',')) //Проверка на формат числа
                                 throw new Exception();
-                            number += input.TextExpression[j];
+                            number += input[j];
 
                             j++;
                         }
@@ -133,7 +139,7 @@ namespace console_calculator.Models.Evaluation
                     else
                         output += number + " "; //Разделяющий пробел
 
-                    if (j < input.TextExpression.Length) //Если не достигли конца выражения
+                    if (j < input.Length) //Если не достигли конца выражения
                         i += j - i - 1; //то переходим на символ за числом
                     else
                         break;
@@ -177,14 +183,13 @@ namespace console_calculator.Models.Evaluation
             return stack.Pop();
         }
 
-        private Stack<T> DeleteElementFromStack<T>(Stack<T> stack, int k)
+        private Stack<string> DeleteElementsFromStack(string[] array)
         {
-            T[] array = stack.ToArray();
-            Stack<T> newStack = new Stack<T>();
-            k = array.Length - k - 1;
+            Stack<string> newStack = new Stack<string>();
+            //k = array.Length - k - 1;
             for (int i = array.Length - 1; i >= 0; i--)
             {
-                if (i != k)
+                if (array[i] != "_")
                     newStack.Push(array[i]);
             }
 
