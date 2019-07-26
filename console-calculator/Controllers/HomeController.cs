@@ -9,12 +9,10 @@ namespace console_calculator.Controllers
 {
     public class HomeController : Controller
     {
-        ControllerContext controllerContext = new ControllerContext();
-
         public ActionResult Index()
         {
+            ViewBag.ExpressionLog = new List<KeyValuePair<String, String>>();
             Expression expression = new Expression();
-            ViewBag.ExpressionLog = Expression.Log;
             return View();
         }
 
@@ -31,8 +29,20 @@ namespace console_calculator.Controllers
             {
                 answer = $"Wrong input, {ex.Message}";
             }
-            Expression.Log.Add(inputField, answer);
-            ViewBag.ExpressionLog = Expression.Log;
+
+            if (Session["log"] == null)
+            {
+                List<KeyValuePair<String, String>> log = new List<KeyValuePair<String, String>>();
+                log.Add(new KeyValuePair<string, string>(inputField, answer));
+                Session.Add("log", log);
+            }
+            else
+            {
+                List<KeyValuePair<String, String>> tempDict = Session["log"] as List<KeyValuePair<String, String>>;
+                tempDict.Add(new KeyValuePair<string, string>(inputField, answer));
+                Session["log"] = tempDict;
+            }
+            ViewBag.ExpressionLog = Session["log"] as List<KeyValuePair<String, String>>;
             ViewBag.inputField = "";
             return View();
         }
