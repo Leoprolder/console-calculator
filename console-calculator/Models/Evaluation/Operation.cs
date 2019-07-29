@@ -54,7 +54,7 @@ namespace console_calculator.Models.Evaluation
                     Priority = 1;
                     break;
                 default:
-                    throw new Exception();
+                    throw new Exception("invalid operation");
             }
 
             Definition = definition;

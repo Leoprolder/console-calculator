@@ -71,7 +71,7 @@ namespace console_calculator.Models.Evaluation
                         if (Int32.TryParse(input[j].ToString(), out int res) || input[j] == '.' || input[j] == ',')
                         {
                             if ((number.IndexOf(',') > 0 || number.IndexOf('.') > 0) && (input[j] == '.' || input[j] == ',')) //Проверка на формат числа
-                                throw new Exception();
+                                throw new Exception("invalid number format");
                             number += input[j];
 
                             j++;
