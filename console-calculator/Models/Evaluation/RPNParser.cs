@@ -21,19 +21,16 @@ namespace console_calculator.Models.Evaluation
             {
                 char symbol = input[i];
 
-                if (OperationQualifier.IsOperation(symbol)) //Если встретившийся символ является операцией
+                if (new Operation().IsOperation(symbol, out Operation.Apply apply)) //Если встретившийся символ является операцией
                 {
-                    IOperation operation = OperationQualifier.GetOperation(symbol);
+                    Operation operation = new Operation(symbol);
 
-                    if (operation is Bracket) //Если встретили скобку
+                    if (operation.Definition == '(')
                     {
-                        if (operation.Definition == '(') //Если открывающая скобка, то помещаем числа в стек
-                        {
-                            string bracketsContent = input.Substring(i + 1, FindClosingBracketIndex(input.Substring(i)) - 1); //(1*2)+(3*4)
-                            int addition = bracketsContent.Length + 1;
-                            output += ToRPN(bracketsContent);
-                            i += addition;
-                        }
+                        string bracketsContent = input.Substring(i + 1, FindClosingBracketIndex(input.Substring(i)) - 1);
+                        int addition = bracketsContent.Length + 1;
+                        output += ToRPN(bracketsContent);
+                        i += addition;
                     }
                     else
                     {
@@ -48,10 +45,10 @@ namespace console_calculator.Models.Evaluation
                             {
                                 if (Char.TryParse(stackArray[j], out char res))
                                 {
-                                    if (OperationQualifier.IsOperation(res))
+                                    if (new Operation().IsOperation(res, out Operation.Apply temp))
                                     {
-                                        if (OperationQualifier.GetOperation(res).Priority >= operation.Priority) //Если приоритет входной операции больше, записываем в стек
-                                        {                                                                        //Иначе - в выходную строку
+                                        if (new Operation(res).Priority >= operation.Priority) //Если приоритет входной операции больше, записываем в стек
+                                        {                                                      //Иначе - в выходную строку
                                             output += res + " ";
                                             stackArray[j] = "_"; //Пометим элемент на удаление
                                         }
@@ -115,12 +112,12 @@ namespace console_calculator.Models.Evaluation
                 {
                     if (Char.TryParse(inputArray[i], out char op))
                     {
-                        if (OperationQualifier.IsOperation(op))
+                        if (new Operation().IsOperation(op, out Operation.Apply apply))
                         {
                             //Берём два числа в стек, применяем операцию
                             double right = stack.Pop();
                             double left = stack.Pop();
-                            stack.Push(OperationQualifier.GetOperation(op).Apply(left, right));
+                            stack.Push(apply(left, right));
                         }
                     }
                 }
@@ -132,7 +129,6 @@ namespace console_calculator.Models.Evaluation
         private Stack<string> DeleteMarkedElementsFromStack(string[] array)
         {
             Stack<string> newStack = new Stack<string>();
-            //k = array.Length - k - 1;
             for (int i = array.Length - 1; i >= 0; i--)
             {
                 if (array[i] != "_")
