@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using console_calculator.Models.Evaluation;
+using console_calculator.Models.Tests;
 
 namespace console_calculator.Controllers
 {
@@ -13,6 +14,7 @@ namespace console_calculator.Controllers
         {
             ViewBag.ExpressionLog = new List<KeyValuePair<String, String>>();
             Expression expression = new Expression();
+            //ViewBag.testLog = Tests.Run();
             return View();
         }
 

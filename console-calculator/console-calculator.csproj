@@ -125,6 +125,7 @@
     <Compile Include="Models\Evaluation\Expression.cs" />
     <Compile Include="Models\Evaluation\Operation.cs" />
     <Compile Include="Models\Evaluation\RPNParser.cs" />
+    <Compile Include="Models\Tests\Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
