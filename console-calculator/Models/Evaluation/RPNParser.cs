@@ -12,7 +12,7 @@ namespace console_calculator.Models.Evaluation
 
         }
 
-        public string ToRPN(string input) //Метод, конвертирующий выражение в обратную польскую запись
+        public string ToRPNRecursive(string input) //Метод, конвертирующий выражение в обратную польскую запись
         {
             Stack<string> stack = new Stack<string>();
             string output = String.Empty;
@@ -29,8 +29,12 @@ namespace console_calculator.Models.Evaluation
                     {
                         string bracketsContent = input.Substring(i + 1, FindClosingBracketIndex(input.Substring(i)) - 1);
                         int addition = bracketsContent.Length + 1;
-                        output += ToRPN(bracketsContent);
+                        output += ToRPNRecursive(bracketsContent);
                         i += addition;
+                    }
+                    else if (i == 0 && operation.Definition == '-')
+                    {
+                        output += '-';
                     }
                     else
                     {

@@ -18,6 +18,7 @@ namespace console_calculator.Models.Tests
             result += testBrackets() ? "Test brackets passed \n" : "Test brackets passed \n";
             result += testConvertationToRPN() ? "Test convertation to RPN passed\n" : "Test convertation to RPN FAILED\n";
             result += testRPNCalculation() ? "Test RPN calculation passed\n" : "Test RPN calculation FAILED\n";
+            result += testMinusWork() ? "Test minus work passed\n" : "Test minus work FAILED\n";
 
             return result;
         }
@@ -90,7 +91,7 @@ namespace console_calculator.Models.Tests
             try
             {
                 RPNParser parser = new RPNParser();
-                string result = parser.ToRPN("7*9+2.1*9+5*(8*7-9/3)");
+                string result = parser.ToRPNRecursive("7*9+2.1*9+5*(8*7-9/3)");
                 if (result == "7 9 * 2,1 9 * + 5 8 7 * 9 3 / - * + ")
                     return true;
                 else
@@ -109,6 +110,22 @@ namespace console_calculator.Models.Tests
                 RPNParser parser = new RPNParser();
                 double result = parser.CalculateRPN("7 9 * 2,1 9 * + 5 8 7 * 9 3 / - * + ");
                 if (result == 346.9)
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        static bool testMinusWork()
+        {
+            try
+            {
+                Expression expression = new Expression("2 + (-2)");
+                if (expression.Calculate() == 0)
                     return true;
                 else
                     return false;

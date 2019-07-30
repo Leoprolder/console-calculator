@@ -39,7 +39,7 @@ namespace console_calculator.Models.Evaluation
             CheckIfLegal(); //Проверим, выражение ли
 
             RPNParser parser = new RPNParser();
-            string rpnExpression = parser.ToRPN(TextExpression);
+            string rpnExpression = parser.ToRPNRecursive(TextExpression);
 
             return parser.CalculateRPN(rpnExpression);
         }
